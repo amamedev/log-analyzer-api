@@ -5,8 +5,6 @@ const date = new Date();
 
 const uploadMiddleware = async (req, res, next) => {
   // TODO: Implementar lógica para subir archivos
-  console.log("Subiendo archivo...");
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   const folder = path.join(process.cwd(), "public", "logs");
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder, { recursive: true });
@@ -35,7 +33,6 @@ const uploadMiddleware = async (req, res, next) => {
     if (err) {
       return res.status(500).send("Error al subir el archivo");
     }
-    console.log("Archivo subido");
     next();
   });
 };

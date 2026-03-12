@@ -1,0 +1,6 @@
+INFO User login
+ERROR Database failed
+WARNING Disk space
+INFO Request completed
+ERROR Timeout
+ERROR Server missing
