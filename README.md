@@ -136,6 +136,26 @@ Respuesta:
 ]
 }
 
+### Obtener los nombres de todos los archivos existentes
+
+| Endpoint  | Descripción              |
+| --------- | ------------------------ |
+| GET /logs | Lista todos los archivos |
+
+```
+curl -X GET http://localhost:PORT/logs
+```
+
+Respuesta:
+
+{
+"files": [
+"logFile-001.txt",
+"logFile-002.txt",
+...
+]
+}
+
 ## 📚 PRÁCTICAS
 
 - Lectura eficiente de archivos grandes con streams.
