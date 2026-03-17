@@ -3,7 +3,6 @@ import path from "path";
 
 const createLogInfo = () => {
   return {
-    file: "",
     count: 0,
   };
 };
@@ -21,7 +20,7 @@ const analyzeLog = {
     const folder = path.join(process.cwd(), "public", "logs");
     const files = fs.readdirSync(folder);
     logInfo.count = files.length;
-    logInfo.logs = files;
+    logInfo.files = files;
     if (files.length === 0) {
       return { message: "No existen archivos de logs" };
     }

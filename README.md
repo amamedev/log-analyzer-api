@@ -83,10 +83,12 @@ curl -X POST http://localhost:PORT/logs -F "log.txt=@/ruta/al/archivo/log.txt"
 
 Respuesta:
 
+```
 {
-"message": "Archivo subido correctamente",
-"fileId": "001"
+    "message": "Archivo subido correctamente",
+    "fileId": "001"
 }
+```
 
 ### Obtener errores de un archivo
 
@@ -102,14 +104,17 @@ curl -X GET http://localhost:PORT/001/errors
 
 Respuesta:
 
+```
 {
-"file": "logFile-001.txt",
-"count": 5,
-"errors": [
-"Error en la conexión a la base de datos",
-"Error al procesar la solicitud"
-]
+    "file": "logFile-001.txt",
+    "count": 20,
+    "errors": [
+        "Error en la conexión a la base de datos",
+        "Error al procesar la solicitud"
+        ...
+    ]
 }
+```
 
 ### Obtener resumen completo
 
@@ -125,16 +130,18 @@ curl -X GET http://localhost:PORT/001/summary
 
 Respuesta:
 
+```
 {
-"file": "logFile-001.txt",
-"count": 50,
-"lines": [
-"Info: Servicio iniciado",
-"Warning: Memoria alta",
-"Error: Conexión fallida",
-...
-]
+    "file": "logFile-001.txt",
+    "count": 50,
+    "lines": [
+        "Info: Servicio iniciado",
+        "Warning: Memoria alta",
+        "Error: Conexión fallida",
+        ...
+    ]
 }
+```
 
 ### Obtener los nombres de todos los archivos existentes
 
@@ -143,19 +150,23 @@ Respuesta:
 | GET /logs | Lista todos los archivos |
 
 ```
+
 curl -X GET http://localhost:PORT/logs
+
 ```
 
 Respuesta:
 
 ```
+
 {
-"files": [
-"logFile-001.txt",
-"logFile-002.txt",
-...
-]
+    "count": 2,
+    "files": [
+        "logFile-001.txt",
+        "logFile-002.txt",
+    ]
 }
+
 ```
 
 ## 📚 PRÁCTICAS
