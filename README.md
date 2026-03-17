@@ -11,14 +11,15 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 - Obtener un resumen completo del archivo.
 - Practicar patrones de desacoplamiento, asincronía, streams, y middlewares.
 
-### El proyecto está construido con buenas prácticas backend:
+### Prácticas implementadas
 
-- Lectura eficiente de archivos grandes con streams
-- Subida de archivos con Multer
-- Separación de responsabilidades (controllers vs services)
-- Simulación de asincronía para procesos de lectura y subida
-- dotenv para manejar variables de entorno de forma segura
-- Configuración dinámica del puerto de la app usando variables de entorno
+- Lectura eficiente de archivos grandes con streams.
+- Gestión de rutas y endpoints REST.
+- Separación de responsabilidades (controller vs service).
+- Simulación de asincronía para procesos de lectura y upload.
+- Gestión automática de nombres de archivos y almacenamiento organizado.
+- Desarrollo de una API lista para producción y pruebas.
+- Uso de Multer para subir archivos de manera segura y eficiente.
 
 ## ⚡ FUNCIONALIDADES
 
@@ -168,16 +169,6 @@ Respuesta:
 }
 
 ```
-
-## 📚 PRÁCTICAS
-
-- Lectura eficiente de archivos grandes con streams.
-- Gestión de rutas y endpoints REST.
-- Separación de responsabilidades (controller vs service).
-- Simulación de asincronía para procesos de lectura y upload.
-- Gestión automática de nombres de archivos y almacenamiento organizado.
-- Desarrollo de una API lista para producción y pruebas.
-- Uso de Multer para subir archivos de manera segura y eficiente.
 
 ## 🚀 POSIBLES PRÓXIMOS PASOS Y MEJORAS
 
