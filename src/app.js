@@ -1,6 +1,6 @@
 import express from "express";
 import router from "./routes/routes.js";
-import createLogFolder from "./utils/createLogFolder.js";
+import createLogFolder from "./config/createLogFolder.js";
 
 // Crear carpeta logs si no existe al iniciar la aplicación
 createLogFolder();

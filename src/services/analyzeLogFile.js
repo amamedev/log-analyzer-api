@@ -1,16 +1,49 @@
 import fs from "fs";
 import path from "path";
+import getFileName from "../utils/getFile.js";
 
+// Crear objeto con la estructura de información de logs
 const createLogInfo = () => {
-  return {
-    count: 0,
-  };
+  return {};
 };
-
+// Verificar si el archivo existe
 const notFoundFile = (file) => {
   if (!fs.existsSync(file)) {
     return { message: "Archivo no encontrado" };
   }
+};
+
+// Analizar archivo de logs según el tipo
+const analyzeFile = async (file, type) => {
+  // TODO: Implementar lógica para analizar el archivo según el tipo
+  const logInfo = createLogInfo();
+  logInfo.file = path.basename(file);
+  return await new Promise((resolve, reject) => {
+    const readStream = fs.createReadStream(file, { encoding: "utf8" });
+
+    readStream.on("data", (chunk) => {
+      const lines = chunk.toString().split("\n");
+      lines.forEach((line) => {
+        const words = line.split(" ");
+        logInfo.rows = (logInfo.rows || 0) + 1;
+        if (words.includes(type) || words.includes(type.toUpperCase())) {
+          logInfo[type + "s"] = logInfo[type + "s"] || [];
+          logInfo[type + "s"].push(line);
+        } else if (type === "summary") {
+          logInfo.logs = logInfo.logs || [];
+          logInfo.logs.push(line);
+        }
+      });
+    });
+
+    readStream.on("end", () => {
+      resolve(logInfo);
+    });
+
+    readStream.on("error", (error) => {
+      reject(error);
+    });
+  });
 };
 
 const analyzeLog = {
@@ -26,145 +59,45 @@ const analyzeLog = {
     }
     return logInfo;
   },
+
   // Obtener los errores de un archivo de logs
   getErrors: async (id) => {
-    const logInfo = createLogInfo();
-    const file = path.join(
-      process.cwd(),
-      "public",
-      "logs",
-      `logFile-${id}.txt`,
-    );
+    let file = getFileName(id);
     notFoundFile(file);
     // TODO: Implementar lógica para obtener los errores del archivo
-    logInfo.file = path.basename(file);
-    return await new Promise((resolve, reject) => {
-      const readStream = fs.createReadStream(file, { encoding: "utf8" });
-
-      readStream.on("data", (chunk) => {
-        const lines = chunk.toString().split("\n");
-        lines.forEach((line) => {
-          const words = line.split(" ");
-          if (words.includes("error") || words.includes("ERROR")) {
-            logInfo.count = (logInfo.count || 0) + 1;
-            logInfo.errors = logInfo.errors || [];
-            logInfo.errors.push(line);
-          }
-        });
-      });
-
-      readStream.on("end", () => {
-        resolve(logInfo);
-      });
-
-      readStream.on("error", (error) => {
-        reject(error);
-      });
-    });
+    return await analyzeFile(file, "error");
   },
+
   // Obtener warnings de un archivo de logs
   getWarnings: async (id) => {
-    const logInfo = createLogInfo();
-    const file = path.join(
-      process.cwd(),
-      "public",
-      "logs",
-      `logFile-${id}.txt`,
-    );
+    let file = getFileName(id);
     notFoundFile(file);
-    // TODO: Implementar lógica para obtener los warnings del archivo
-    logInfo.file = path.basename(file);
-    return await new Promise((resolve, reject) => {
-      const readStream = fs.createReadStream(file, { encoding: "utf8" });
-
-      readStream.on("data", (chunk) => {
-        const lines = chunk.toString().split("\n");
-        lines.forEach((line) => {
-          const words = line.split(" ");
-          if (words.includes("warning") || words.includes("WARNING")) {
-            logInfo.count = (logInfo.count || 0) + 1;
-            logInfo.warnings = logInfo.warnings || [];
-            logInfo.warnings.push(line);
-          }
-        });
-      });
-
-      readStream.on("end", () => {
-        resolve(logInfo);
-      });
-
-      readStream.on("error", (error) => {
-        reject(error);
-      });
-    });
+    // TODO: Implementar lógica para obtener los errores del archivo
+    return await analyzeFile(file, "warning");
   },
+
   // Obtener infos de un archivo de logs
   getInfos: async (id) => {
-    const logInfo = createLogInfo();
-    const file = path.join(
-      process.cwd(),
-      "public",
-      "logs",
-      `logFile-${id}.txt`,
-    );
+    let file = getFileName(id);
     notFoundFile(file);
-    // TODO: Implementar lógica para obtener los infos del archivo
-    logInfo.file = path.basename(file);
-    return await new Promise((resolve, reject) => {
-      const readStream = fs.createReadStream(file, { encoding: "utf8" });
-
-      readStream.on("data", (chunk) => {
-        const lines = chunk.toString().split("\n");
-        lines.forEach((line) => {
-          const words = line.split(" ");
-          if (words.includes("info") || words.includes("INFO")) {
-            logInfo.count = (logInfo.count || 0) + 1;
-            logInfo.infos = logInfo.infos || [];
-            logInfo.infos.push(line);
-          }
-        });
-      });
-
-      readStream.on("end", () => {
-        resolve(logInfo);
-      });
-
-      readStream.on("error", (error) => {
-        reject(error);
-      });
-    });
+    // TODO: Implementar lógica para obtener los errores del archivo
+    return await analyzeFile(file, "info");
   },
+
   // Obtener el resumen de un archivo de logs
   getSummary: async (id) => {
-    const logInfo = createLogInfo();
-    const file = path.join(
-      process.cwd(),
-      "public",
-      "logs",
-      `logFile-${id}.txt`,
-    );
+    let file = getFileName(id);
     notFoundFile(file);
-    // TODO: Implementar lógica para obtener el resumen del archivo
-    logInfo.file = path.basename(file);
-    return await new Promise((resolve, reject) => {
-      const readStream = fs.createReadStream(file, { encoding: "utf8" });
-      readStream.on("data", (chunk) => {
-        const lines = chunk.toString().split("\n");
-        lines.forEach((line) => {
-          logInfo.count = (logInfo.count || 0) + 1;
-          logInfo.logs = logInfo.logs || [];
-          logInfo.logs.push(line);
-        });
-      });
+    // TODO: Implementar lógica para obtener los errores del archivo
+    return await analyzeFile(file, "summary");
+  },
 
-      readStream.on("end", () => {
-        resolve(logInfo);
-      });
-
-      readStream.on("error", (error) => {
-        reject(error);
-      });
-    });
+  // Obtener porcentajes de tipos de logs en un archivo
+  getStats: async (id) => {
+    let file = getFileName(id);
+    notFoundFile(file);
+    // TODO: Implementar lógica para obtener los errores del archivo
+    return await analyzeFile(file, "stats");
   },
 };
 
