@@ -11,7 +11,14 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 - Obtener un resumen completo del archivo.
 - Practicar patrones de desacoplamiento, asincronía, streams, y middlewares.
 
-### El proyecto está diseñado con estructura modular, separando la lógica de negocio de la gestión de rutas y peticiones HTTP, facilitando escalabilidad y mantenimiento.
+### El proyecto está construido con buenas prácticas de backend, incluyendo:
+
+- Lectura eficiente de archivos grandes con streams
+- Subida de archivos con Multer
+- Separación de responsabilidades (controllers vs services)
+- Simulación de asincronía para procesos de lectura y subida
+- dotenv para manejar variables de entorno de forma segura
+- Configuración dinámica del puerto de la app usando variables de entorno
 
 ## ⚡ FUNCIONALIDADES
 
@@ -30,6 +37,7 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 - File System & Streams: lectura y manejo de archivos grandes con createReadStream.
 - Desacoplamiento: controllers/logController.js maneja HTTP, services/analyzeLogFile.js contiene la lógica de análisis.
 - Asincronía simulada: await new Promise para retrasos en lectura y subida de archivos.
+- dotenv – manejo de variables de entorno
 - Estructura modular y escalable: fácil de mantener y extender.
 - Multer: middleware para subida de archivos.
 
@@ -54,9 +62,12 @@ npm install
 npm start
 ```
 
-La API correrá en http://localhost:3000.
+La API correra en:
 
-Carpeta de logs: public/logs
+http://localhost:<PORT>
+
+donde `PORT` se define en tu archivo `.env`.  
+Si no se define, la app usará el puerto por defecto `3000`.
 
 ## 🧪 EJEMPLO DE USO
 
