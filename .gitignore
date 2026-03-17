@@ -1,0 +1,7 @@
+# Ignorar la carpeta node_modules
+node_modules/
+
+.env          # Variables de entorno
+logs/         # Archivos de log generados
+dist/         # Carpetas de build
+.DS_Store     # MacOS
