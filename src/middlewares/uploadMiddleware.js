@@ -1,15 +1,13 @@
 import multer from "multer";
-import path from "path";
 import fs from "fs";
+import path from "path";
 
 const uploadMiddleware = async (req, res, next) => {
   // TODO: Implementar lógica para subir archivos
   const folder = path.join(process.cwd(), "public", "logs");
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder, { recursive: true });
-  }
   const files = fs.readdirSync(folder);
   let ID = `00${files.length + 1}`;
+
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, folder);
@@ -21,6 +19,7 @@ const uploadMiddleware = async (req, res, next) => {
       cb(null, `logFile-${ID}.txt`);
     },
   });
+
   const upload = multer({ storage });
   upload.single("log")(req, res, (err) => {
     if (err) {

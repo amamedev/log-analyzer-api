@@ -4,17 +4,14 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 
 ## 📋 DESCRIPCIÓN
 
-Este proyecto permite:
+### Este proyecto permite:
 
-Subir archivos de logs a la API y almacenarlos de forma organizada usando Multer.
+- Subir archivos de logs a la API y almacenarlos de forma organizada usando Multer.
+- Analizar los archivos y obtener información por tipo de línea: errors, warnings, info.
+- Obtener un resumen completo del archivo.
+- Practicar patrones de desacoplamiento, asincronía, streams, y middlewares.
 
-Analizar los archivos y obtener información por tipo de línea: errors, warnings, info.
-
-Obtener un resumen completo del archivo.
-
-Practicar patrones de desacoplamiento, asincronía, streams, y middleware de upload.
-
-El proyecto está diseñado con estructura modular, separando la lógica de negocio de la gestión de rutas y peticiones HTTP, facilitando escalabilidad y mantenimiento.
+### El proyecto está diseñado con estructura modular, separando la lógica de negocio de la gestión de rutas y peticiones HTTP, facilitando escalabilidad y mantenimiento.
 
 ## ⚡ FUNCIONALIDADES
 
@@ -81,6 +78,7 @@ Respuesta:
 ### Obtener errores de un archivo
 
 \*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
+
 GET /001/errors
 
 Respuesta:
@@ -97,6 +95,7 @@ Respuesta:
 ### Obtener resumen completo
 
 \*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
+
 GET /001/summary
 
 Respuesta:
@@ -128,7 +127,3 @@ Respuesta:
 - Soporte para archivos en formato CSV o JSON.
 - Integración con base de datos para almacenar logs de forma persistente.
 - Tests unitarios y de integración para endpoints y lógica de análisis.
-
-```
-
-```

@@ -1,8 +1,11 @@
 import express from "express";
-import uploadMiddleware from "./middlewares/uploadMiddleware.js";
-import processMiddleware from "./services/analyzeLogFile.js";
 import router from "./routes/routes.js";
+import createLogFolder from "./utils/createLogFolder.js";
 
+// Crear carpeta logs si no existe al iniciar la aplicación
+createLogFolder();
+
+// Configuración básica
 const app = express();
 
 app.use("/logAnalizer", router);

@@ -22,6 +22,9 @@ const analyzeLog = {
     const files = fs.readdirSync(folder);
     logInfo.count = files.length;
     logInfo.logs = files;
+    if (files.length === 0) {
+      return { message: "No existen archivos de logs" };
+    }
     return logInfo;
   },
   // Obtener los errores de un archivo de logs
