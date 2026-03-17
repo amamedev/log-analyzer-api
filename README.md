@@ -1,8 +1,8 @@
-/////////////// LOG ANALYZER API ///////////////
+# 📂 Log Analyzer API
 
 Node.js backend API para subir, almacenar y analizar archivos de logs, construida con enfoque en buenas prácticas y asincronía. Diseñada para monitoreo y análisis de errores, warnings e información general de logs.
 
-/// DESCRIPCIÓN ///
+## 📋 DESCRIPCIÓN
 
 Este proyecto permite:
 
@@ -16,9 +16,10 @@ Practicar patrones de desacoplamiento, asincronía, streams, y middleware de upl
 
 El proyecto está diseñado con estructura modular, separando la lógica de negocio de la gestión de rutas y peticiones HTTP, facilitando escalabilidad y mantenimiento.
 
-/// FUNCIONALIDADES ///
+## 🚀 FUNCIONALIDADES
 
-Endpoints disponibles
+### Endpoints disponibles
+
 GET /logAnalizer/logs - Devuelve un JSON con el recuento de los archivos de logs almacenados para analizar.
 GET /logAnalizer/:id/errors - Devuelve el nombre del archivo, cantidad de líneas de error y un array con esas líneas.
 GET /logAnalizer/:id/warnings - Devuelve el nombre del archivo, cantidad de líneas de warning y un array con esas líneas.
@@ -59,12 +60,13 @@ La API correrá en http://localhost:3000.
 
 Carpeta de logs: public/logs
 
-/// EJEMPLO DE USO ///
+## 🧪 EJEMPLO DE USO
 
-- Subir un archivo de log -
-  POST /logs
-  Content-Type: multipart/form-data
-  File: log.txt
+### Subir un archivo de log
+
+POST /logs
+Content-Type: multipart/form-data
+File: log.txt
 
 Respuesta:
 
@@ -73,9 +75,10 @@ Respuesta:
 "fileId": "001"
 }
 
-- Obtener errores de un archivo -
-  \*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
-  GET /001/errors
+### Obtener errores de un archivo
+
+\*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
+GET /001/errors
 
 Respuesta:
 
@@ -88,9 +91,10 @@ Respuesta:
 ]
 }
 
-- Obtener resumen completo -
-  \*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
-  GET /001/summary
+### Obtener resumen completo
+
+\*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
+GET /001/summary
 
 Respuesta:
 
@@ -105,19 +109,19 @@ Respuesta:
 ]
 }
 
-/// LO QUE PRACTIQUE EN ESTE PROYECTO ///
+## 📚 LO QUE PRACTIQUE EN ESTE PROYECTO
 
-. Lectura eficiente de archivos grandes con streams.
-. Gestión de rutas y endpoints REST.
-. Separación de responsabilidades (controller vs service).
-. Simulación de asincronía para procesos de lectura y upload.
-. Gestión automática de nombres de archivos y almacenamiento organizado.
-. Desarrollo de una API lista para producción y pruebas.
-. Uso de Multer para subir archivos de manera segura y eficiente.
+- Lectura eficiente de archivos grandes con streams.
+- Gestión de rutas y endpoints REST.
+- Separación de responsabilidades (controller vs service).
+- Simulación de asincronía para procesos de lectura y upload.
+- Gestión automática de nombres de archivos y almacenamiento organizado.
+- Desarrollo de una API lista para producción y pruebas.
+- Uso de Multer para subir archivos de manera segura y eficiente.
 
-/// POSIBLES PRÓXIMOS PASOS Y MEJORAS ///
+## 🚀 POSIBLES PRÓXIMOS PASOS Y MEJORAS
 
-. Agregar paginación en endpoints de logs grandes.
-. Soporte para archivos en formato CSV o JSON.
-. Integración con base de datos para almacenar logs de forma persistente.
-. Tests unitarios y de integración para endpoints y lógica de análisis.
+- Agregar paginación en endpoints de logs grandes.
+- Soporte para archivos en formato CSV o JSON.
+- Integración con base de datos para almacenar logs de forma persistente.
+- Tests unitarios y de integración para endpoints y lógica de análisis.
