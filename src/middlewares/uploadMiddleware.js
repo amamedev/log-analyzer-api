@@ -24,9 +24,14 @@ const uploadMiddleware = async (req, res, next) => {
   const upload = multer({ storage });
   upload.single("log")(req, res, (err) => {
     if (err) {
-      return res.status(500).send("Error al subir el archivo");
+      return res.status(500).json({
+        message: "Error al subir el archivo",
+      });
     }
-    return res.status(200).send("Archivo subido correctamente");
+    return res.status(200).json({
+      message: "Archivo subido correctamente",
+      fileID: ID,
+    });
   });
 };
 
