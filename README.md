@@ -73,11 +73,9 @@ Si no se define, la app usará el puerto por defecto `3000`.
 
 ### Subir un archivo de log
 
-```
 POST /logs
 Content-Type: multipart/form-data
 File: log.txt
-```
 
 Respuesta:
 
