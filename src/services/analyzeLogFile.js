@@ -45,10 +45,82 @@ const analyzeLog = {
         const lines = chunk.toString().split("\n");
         lines.forEach((line) => {
           const words = line.split(" ");
-          if (words[0] === "ERROR") {
+          if (words.includes("error") || words.includes("ERROR")) {
             logInfo.count = (logInfo.count || 0) + 1;
             logInfo.errors = logInfo.errors || [];
             logInfo.errors.push(line);
+          }
+        });
+      });
+
+      readStream.on("end", () => {
+        resolve(logInfo);
+      });
+
+      readStream.on("error", (error) => {
+        reject(error);
+      });
+    });
+  },
+  // Obtener warnings de un archivo de logs
+  getWarnings: async (id) => {
+    const logInfo = createLogInfo();
+    const file = path.join(
+      process.cwd(),
+      "public",
+      "logs",
+      `logFile-${id}.txt`,
+    );
+    notFoundFile(file);
+    // TODO: Implementar lógica para obtener los warnings del archivo
+    logInfo.file = path.basename(file);
+    return await new Promise((resolve, reject) => {
+      const readStream = fs.createReadStream(file, { encoding: "utf8" });
+
+      readStream.on("data", (chunk) => {
+        const lines = chunk.toString().split("\n");
+        lines.forEach((line) => {
+          const words = line.split(" ");
+          if (words.includes("warning") || words.includes("WARNING")) {
+            logInfo.count = (logInfo.count || 0) + 1;
+            logInfo.warnings = logInfo.warnings || [];
+            logInfo.warnings.push(line);
+          }
+        });
+      });
+
+      readStream.on("end", () => {
+        resolve(logInfo);
+      });
+
+      readStream.on("error", (error) => {
+        reject(error);
+      });
+    });
+  },
+  // Obtener infos de un archivo de logs
+  getInfos: async (id) => {
+    const logInfo = createLogInfo();
+    const file = path.join(
+      process.cwd(),
+      "public",
+      "logs",
+      `logFile-${id}.txt`,
+    );
+    notFoundFile(file);
+    // TODO: Implementar lógica para obtener los infos del archivo
+    logInfo.file = path.basename(file);
+    return await new Promise((resolve, reject) => {
+      const readStream = fs.createReadStream(file, { encoding: "utf8" });
+
+      readStream.on("data", (chunk) => {
+        const lines = chunk.toString().split("\n");
+        lines.forEach((line) => {
+          const words = line.split(" ");
+          if (words.includes("info") || words.includes("INFO")) {
+            logInfo.count = (logInfo.count || 0) + 1;
+            logInfo.infos = logInfo.infos || [];
+            logInfo.infos.push(line);
           }
         });
       });

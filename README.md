@@ -26,10 +26,10 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 ### Endpoints disponibles
 
 - GET /logAnalizer/logs - Devuelve un JSON con el recuento de los archivos de logs almacenados para analizar.
+- GET /logAnalizer/:id/summary - Devuelve el nombre del archivo, recuento total de líneas y un array con todas las líneas.
 - GET /logAnalizer/:id/errors - Devuelve el nombre del archivo, cantidad de líneas de error y un array con esas líneas.
 - GET /logAnalizer/:id/warnings - Devuelve el nombre del archivo, cantidad de líneas de warning y un array con esas líneas.
-- GET /logAnalizer/:id/info - Devuelve el nombre del archivo, cantidad de líneas de info y un array con esas líneas.
-- GET /logAnalizer/:id/summary - Devuelve el nombre del archivo, recuento total de líneas y un array con todas las líneas.
+- GET /logAnalizer/:id/infos - Devuelve el nombre del archivo, cantidad de líneas de info y un array con esas líneas.
 - POST /logAnalizer/logs - Permite subir archivos de logs (.txt). Los archivos se guardan en public/logs y se renombran automáticamente como logFile-001.txt, logFile-002.txt, etc. Se usa Multer para gestionar la subida de archivos.
 
 ## 🛠️ Tecnologías y conceptos aplicados
@@ -70,7 +70,7 @@ http://localhost:PORT
 donde `PORT` se define en tu archivo `.env`.  
 Si no se define, la app usará el puerto por defecto `3000`.
 
-## 🧪 EJEMPLO DE USO
+## 🧪 EJEMPLOS DE USO
 
 ### Subir un archivo de log
 
@@ -93,7 +93,7 @@ Respuesta:
 
 ### Obtener errores de un archivo
 
-\*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
+\*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo con GET /logs.
 
 | Endpoint        | Descripción                       |
 | --------------- | --------------------------------- |
@@ -119,7 +119,7 @@ Respuesta:
 
 ### Obtener resumen completo
 
-\*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
+\*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo con GET /logs
 
 | Endpoint         | Descripción                               |
 | ---------------- | ----------------------------------------- |
@@ -142,32 +142,6 @@ Respuesta:
         ...
     ]
 }
-```
-
-### Obtener los nombres de todos los archivos existentes
-
-| Endpoint  | Descripción              |
-| --------- | ------------------------ |
-| GET /logs | Lista todos los archivos |
-
-```
-
-curl -X GET http://localhost:PORT/logs
-
-```
-
-Respuesta:
-
-```
-
-{
-    "count": 2,
-    "files": [
-        "logFile-001.txt",
-        "logFile-002.txt",
-    ]
-}
-
 ```
 
 ## 🚀 POSIBLES PRÓXIMOS PASOS Y MEJORAS

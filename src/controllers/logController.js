@@ -1,5 +1,10 @@
 import analyzeLog from "../services/analyzeLogFile.js";
 
+const getID = (req) => {
+  const { id } = req.params;
+  return id;
+};
+
 const logController = {
   // Obtener todos los archivos de logs
   getLogs: (req, res, next) => {
@@ -17,9 +22,26 @@ const logController = {
   // Obtener los errores de un archivo de logs
   getErrors: async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const errors = await analyzeLog.getErrors(id);
+      const errors = await analyzeLog.getErrors(getID(req));
       res.json(errors);
+    } catch (error) {
+      next(error);
+    }
+  },
+  // Obtener los warnings de un archivo de logs
+  getWarnings: async (req, res, next) => {
+    try {
+      const warnings = await analyzeLog.getWarnings(getID(req));
+      res.json(warnings);
+    } catch (error) {
+      next(error);
+    }
+  },
+  // Obtener los infos de un archivo de logs
+  getInfos: async (req, res, next) => {
+    try {
+      const infos = await analyzeLog.getInfos(getID(req));
+      res.json(infos);
     } catch (error) {
       next(error);
     }
@@ -27,8 +49,7 @@ const logController = {
   // Obtener el resumen de un archivo de logs
   getSummary: async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const summary = await analyzeLog.getSummary(id);
+      const summary = await analyzeLog.getSummary(getID(req));
       res.json(summary);
     } catch (error) {
       if (error["code"] === "ENOENT") {
