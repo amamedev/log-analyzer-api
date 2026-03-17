@@ -18,6 +18,7 @@ const analyzeFile = async (file, type) => {
   // TODO: Implementar lógica para analizar el archivo según el tipo
   const logInfo = createLogInfo();
   logInfo.file = path.basename(file);
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return await new Promise((resolve, reject) => {
     const readStream = fs.createReadStream(file, { encoding: "utf8" });
 

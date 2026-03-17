@@ -15,11 +15,12 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 
 - Lectura eficiente de archivos grandes con streams.
 - Gestión de rutas y endpoints REST.
-- Separación de responsabilidades (controller vs service).
+- Desacoplamiento: Controllers para el manejo de HTTP, services para la lógica de negocio y abstracción de funciones reutilizables para evitar duplicación.
 - Simulación de asincronía para procesos de lectura y upload.
 - Gestión automática de nombres de archivos y almacenamiento organizado.
 - Desarrollo de una API lista para producción y pruebas.
 - Uso de Multer para subir archivos de manera segura y eficiente.
+- Asincronía simulada: await new Promise para retrasos en lectura y subida de archivos.
 
 ## ⚡ FUNCIONALIDADES
 
@@ -32,14 +33,11 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 - GET /logAnalizer/:id/infos - Devuelve el nombre del archivo, cantidad de líneas de info y un array con esas líneas.
 - POST /logAnalizer/logs - Permite subir archivos de logs (.txt). Los archivos se guardan en public/logs y se renombran automáticamente como logFile-001.txt, logFile-002.txt, etc. Se usa Multer para gestionar la subida de archivos.
 
-## 🛠️ Tecnologías y conceptos aplicados
+## 🛠️ Tecnologías
 
 - Node.js & Express: servidor y gestión de rutas.
 - File System & Streams: lectura y manejo de archivos grandes con createReadStream.
-- Desacoplamiento: controllers/logController.js maneja HTTP, services/analyzeLogFile.js contiene la lógica de análisis.
-- Asincronía simulada: await new Promise para retrasos en lectura y subida de archivos.
 - dotenv – manejo de variables de entorno
-- Estructura modular y escalable: fácil de mantener y extender.
 - Multer: middleware para subida de archivos.
 
 ## 🚀 CÓMO CORRER EL PROYECTO
