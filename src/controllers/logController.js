@@ -1,4 +1,3 @@
-import { log } from "console";
 import analyzeLog from "../services/analyzeLogFile.js";
 
 const logController = {

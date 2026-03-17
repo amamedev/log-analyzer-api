@@ -1,7 +1,6 @@
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-const date = new Date();
 
 const uploadMiddleware = async (req, res, next) => {
   // TODO: Implementar lógica para subir archivos
