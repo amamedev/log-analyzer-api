@@ -16,45 +16,46 @@ Practicar patrones de desacoplamiento, asincronía, streams, y middleware de upl
 
 El proyecto está diseñado con estructura modular, separando la lógica de negocio de la gestión de rutas y peticiones HTTP, facilitando escalabilidad y mantenimiento.
 
-## 🚀 FUNCIONALIDADES
+## ⚡ FUNCIONALIDADES
 
 ### Endpoints disponibles
 
-GET /logAnalizer/logs - Devuelve un JSON con el recuento de los archivos de logs almacenados para analizar.
-GET /logAnalizer/:id/errors - Devuelve el nombre del archivo, cantidad de líneas de error y un array con esas líneas.
-GET /logAnalizer/:id/warnings - Devuelve el nombre del archivo, cantidad de líneas de warning y un array con esas líneas.
-GET /logAnalizer/:id/info - Devuelve el nombre del archivo, cantidad de líneas de info y un array con esas líneas.
-GET /logAnalizer/:id/summary - Devuelve el nombre del archivo, recuento total de líneas y un array con todas las líneas.
-POST /logAnalizer/logs - Permite subir archivos de logs (.txt). Los archivos se guardan en public/logs y se renombran automáticamente como logFile-001.txt, logFile-002.txt, etc. Se usa Multer para gestionar la subida de archivos.
+- GET /logAnalizer/logs - Devuelve un JSON con el recuento de los archivos de logs almacenados para analizar.
+- GET /logAnalizer/:id/errors - Devuelve el nombre del archivo, cantidad de líneas de error y un array con esas líneas.
+- GET /logAnalizer/:id/warnings - Devuelve el nombre del archivo, cantidad de líneas de warning y un array con esas líneas.
+- GET /logAnalizer/:id/info - Devuelve el nombre del archivo, cantidad de líneas de info y un array con esas líneas.
+- GET /logAnalizer/:id/summary - Devuelve el nombre del archivo, recuento total de líneas y un array con todas las líneas.
+- POST /logAnalizer/logs - Permite subir archivos de logs (.txt). Los archivos se guardan en public/logs y se renombran automáticamente como logFile-001.txt, logFile-002.txt, etc. Se usa Multer para gestionar la subida de archivos.
 
-Tecnologías y conceptos aplicados
+## 🛠️ Tecnologías y conceptos aplicados
 
-Node.js & Express: servidor y gestión de rutas.
+- Node.js & Express: servidor y gestión de rutas.
+- File System & Streams: lectura y manejo de archivos grandes con createReadStream.
+- Desacoplamiento: controllers/logController.js maneja HTTP, services/analyzeLogFile.js contiene la lógica de análisis.
+- Asincronía simulada: await new Promise para retrasos en lectura y subida de archivos.
+- Estructura modular y escalable: fácil de mantener y extender.
+- Multer: middleware para subida de archivos.
 
-Multer: middleware para subida de archivos.
+## 🚀 CÓMO CORRER EL PROYECTO
 
-File System & Streams: lectura y manejo de archivos grandes con createReadStream.
+### Clonar el repositorio
 
-Desacoplamiento: controllers/logController.js maneja HTTP, services/analyzeLogFile.js contiene la lógica de análisis.
-
-Asincronía simulada: await new Promise para retrasos en lectura y subida de archivos.
-
-Estructura modular y escalable: fácil de mantener y extender.
-
-Cómo correr el proyecto
-
-Clonar el repositorio:
-
+```
 git clone https://github.com/tuusuario/log-analyzer-api.git
 cd log-analyzer-api
+```
 
-Instalar dependencias:
+### Instalar dependencias
 
+```
 npm install
+```
 
-Ejecutar la API:
+### Ejecutar la API
 
+```
 npm start
+```
 
 La API correrá en http://localhost:3000.
 
@@ -64,9 +65,11 @@ Carpeta de logs: public/logs
 
 ### Subir un archivo de log
 
+```
 POST /logs
 Content-Type: multipart/form-data
 File: log.txt
+```
 
 Respuesta:
 
@@ -109,7 +112,7 @@ Respuesta:
 ]
 }
 
-## 📚 LO QUE PRACTIQUE EN ESTE PROYECTO
+## 📚 PRÁCTICAS
 
 - Lectura eficiente de archivos grandes con streams.
 - Gestión de rutas y endpoints REST.
@@ -125,3 +128,7 @@ Respuesta:
 - Soporte para archivos en formato CSV o JSON.
 - Integración con base de datos para almacenar logs de forma persistente.
 - Tests unitarios y de integración para endpoints y lógica de análisis.
+
+```
+
+```
