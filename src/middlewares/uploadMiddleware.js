@@ -9,6 +9,8 @@ const uploadMiddleware = async (req, res, next) => {
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder, { recursive: true });
   }
+  const files = fs.readdirSync(folder);
+  let ID = `00${files.length + 1}`;
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, folder);
@@ -17,15 +19,7 @@ const uploadMiddleware = async (req, res, next) => {
       if (file.mimetype !== "text/plain") {
         return cb(res.status(400).send("El archivo debe ser de tipo texto"));
       }
-      cb(
-        null,
-        `[${date
-          .toLocaleDateString()
-          .replace(
-            /\//g,
-            "-",
-          )}][${date.toLocaleTimeString()}]${file.originalname.slice(0, -4)}-log-.txt`,
-      );
+      cb(null, `logFile-${ID}.txt`);
     },
   });
   const upload = multer({ storage });
@@ -33,7 +27,7 @@ const uploadMiddleware = async (req, res, next) => {
     if (err) {
       return res.status(500).send("Error al subir el archivo");
     }
-    next();
+    return res.status(200).send("Archivo subido correctamente");
   });
 };
 

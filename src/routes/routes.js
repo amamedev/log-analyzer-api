@@ -3,6 +3,9 @@ import uploadMiddleware from "../middlewares/uploadMiddleware.js";
 import { Router } from "express";
 const router = Router();
 
-router.post("/upload", uploadMiddleware, logController.analizeLog);
+router.get("/logs", logController.getLogs);
+router.get("/:id/errors", logController.getErrors);
+router.get("/:id/summary", logController.getSummary);
+router.post("/logs", uploadMiddleware);
 
 export default router;
