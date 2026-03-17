@@ -73,9 +73,13 @@ Si no se define, la app usará el puerto por defecto `3000`.
 
 ### Subir un archivo de log
 
-POST /logs
-Content-Type: multipart/form-data
-File: log.txt
+| Endpoint   | Descripción     |
+| ---------- | --------------- |
+| POST /logs | Sube un archivo |
+
+```
+curl -X POST http://localhost:PORT/logs -F "log.txt=@/ruta/al/archivo/log.txt"
+```
 
 Respuesta:
 
@@ -88,7 +92,13 @@ Respuesta:
 
 \*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
 
-GET /001/errors
+| Endpoint        | Descripción                       |
+| --------------- | --------------------------------- |
+| GET /:id/errors | Obtiene los errores de un archivo |
+
+```
+curl -X GET http://localhost:PORT/001/errors
+```
 
 Respuesta:
 
@@ -105,7 +115,13 @@ Respuesta:
 
 \*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo.
 
-GET /001/summary
+| Endpoint         | Descripción                               |
+| ---------------- | ----------------------------------------- |
+| GET /:id/summary | Obtiene el resumen completo de un archivo |
+
+```
+curl -X GET http://localhost:PORT/001/summary
+```
 
 Respuesta:
 
