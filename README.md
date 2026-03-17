@@ -11,7 +11,7 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 - Obtener un resumen completo del archivo.
 - Practicar patrones de desacoplamiento, asincronía, streams, y middlewares.
 
-### El proyecto está construido con buenas prácticas de backend, incluyendo:
+### El proyecto está construido con buenas prácticas backend:
 
 - Lectura eficiente de archivos grandes con streams
 - Subida de archivos con Multer
@@ -64,7 +64,7 @@ npm start
 
 La API correra en:
 
-http://localhost:<PORT>
+http://localhost:PORT
 
 donde `PORT` se define en tu archivo `.env`.  
 Si no se define, la app usará el puerto por defecto `3000`.
