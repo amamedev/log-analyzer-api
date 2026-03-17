@@ -148,6 +148,7 @@ curl -X GET http://localhost:PORT/logs
 
 Respuesta:
 
+```
 {
 "files": [
 "logFile-001.txt",
@@ -155,6 +156,7 @@ Respuesta:
 ...
 ]
 }
+```
 
 ## 📚 PRÁCTICAS
 
