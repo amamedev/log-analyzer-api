@@ -27,10 +27,7 @@ Node.js backend API para subir, almacenar y analizar archivos de logs, construid
 ### Endpoints disponibles
 
 - GET /logAnalizer/logs - Devuelve un JSON con el recuento de los archivos de logs almacenados para analizar.
-- GET /logAnalizer/:id/summary - Devuelve el nombre del archivo, recuento total de líneas y un array con todas las líneas.
-- GET /logAnalizer/:id/errors - Devuelve el nombre del archivo, cantidad de líneas de error y un array con esas líneas.
-- GET /logAnalizer/:id/warnings - Devuelve el nombre del archivo, cantidad de líneas de warning y un array con esas líneas.
-- GET /logAnalizer/:id/infos - Devuelve el nombre del archivo, cantidad de líneas de info y un array con esas líneas.
+- GET /logAnalizer/:id/types - Devuelve un JSON con los tipos de logs disponibles para un archivo específico.
 - POST /logAnalizer/logs - Permite subir archivos de logs (.txt). Los archivos se guardan en public/logs y se renombran automáticamente como logFile-001.txt, logFile-002.txt, etc. Se usa Multer para gestionar la subida de archivos.
 
 ## 🛠️ Tecnologías
@@ -85,20 +82,20 @@ Respuesta:
 ```
 {
     "message": "Archivo subido correctamente",
-    "fileId": "001"
+    "fileID": "001"
 }
 ```
 
-### Obtener errores de un archivo
+### Obtener tipos de logs de un archivo
 
 \*IMPORTANTE: En caso de haber subido varios archivos, listar los archivos disponibles en la carpeta public/logs para obtener el ID del archivo con GET /logs.
 
-| Endpoint        | Descripción                       |
-| --------------- | --------------------------------- |
-| GET /:id/errors | Obtiene los errores de un archivo |
+| Endpoint       | Descripción                             |
+| -------------- | --------------------------------------- |
+| GET /:id/types | Obtiene los tipos de logs de un archivo |
 
 ```
-curl -X GET http://localhost:PORT/001/errors
+curl -X GET http://localhost:PORT/logAnalizer/001/error
 ```
 
 Respuesta:
@@ -106,12 +103,16 @@ Respuesta:
 ```
 {
     "file": "logFile-001.txt",
-    "count": 20,
-    "errors": [
-        "Error en la conexión a la base de datos",
-        "Error al procesar la solicitud"
-        ...
-    ]
+    "data": {
+        "type": "error",
+        "rows": 98,
+        "logs": [
+            "ERROR Database failed",
+            "ERROR Timeout",
+            "ERROR Server missing",
+            ...
+        ]
+    }
 }
 ```
 
@@ -124,7 +125,7 @@ Respuesta:
 | GET /:id/summary | Obtiene el resumen completo de un archivo |
 
 ```
-curl -X GET http://localhost:PORT/001/summary
+curl -X GET http://localhost:PORT/logAnalizer/001/summary
 ```
 
 Respuesta:
@@ -132,13 +133,17 @@ Respuesta:
 ```
 {
     "file": "logFile-001.txt",
-    "count": 50,
-    "lines": [
-        "Info: Servicio iniciado",
-        "Warning: Memoria alta",
-        "Error: Conexión fallida",
-        ...
-    ]
+    "data": {
+        "type": "summary",
+        "rows": 234,
+        "logs": [
+            "INFO User login",
+            "ERROR Database failed",
+            "WARNING Disk space",
+            "INFO Request completed",
+            ...
+        ]
+    }
 }
 ```
 

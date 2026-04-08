@@ -1,3 +1,6 @@
+/**
+ * Obtiene el nombre del archivo de logs
+ */
 import path from "path";
 
 const getFileName = (id) => {

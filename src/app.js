@@ -11,7 +11,7 @@ const app = express();
 app.use("/logAnalizer", router);
 
 app.use((req, res) => {
-  res.status(404).send("Página no encontrada");
+  res.status(404).send("Ruta no encontrada");
 });
 
 export default app;

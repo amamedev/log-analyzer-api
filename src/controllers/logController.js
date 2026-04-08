@@ -1,13 +1,11 @@
+/**
+ * Controlador para los logs
+ */
 import analyzeLog from "../services/analyzeLogFile.js";
-
-const getID = (req) => {
-  const { id } = req.params;
-  return id;
-};
 
 const logController = {
   // Obtener todos los archivos de logs
-  getLogs: (req, res, next) => {
+  getLogs: (req, res) => {
     try {
       const logs = analyzeLog.getLogs();
       if (!logs) {
@@ -16,46 +14,22 @@ const logController = {
 
       res.json(logs);
     } catch (error) {
-      next(error);
+      res.status(500).send("Error al obtener los logs");
     }
   },
-  // Obtener los errores de un archivo de logs
-  getErrors: async (req, res, next) => {
+
+  // Obtener tipos de logs de un archivo
+  getTypes: async (req, res) => {
     try {
-      const errors = await analyzeLog.getErrors(getID(req));
-      res.json(errors);
-    } catch (error) {
-      next(error);
-    }
-  },
-  // Obtener los warnings de un archivo de logs
-  getWarnings: async (req, res, next) => {
-    try {
-      const warnings = await analyzeLog.getWarnings(getID(req));
-      res.json(warnings);
-    } catch (error) {
-      next(error);
-    }
-  },
-  // Obtener los infos de un archivo de logs
-  getInfos: async (req, res, next) => {
-    try {
-      const infos = await analyzeLog.getInfos(getID(req));
-      res.json(infos);
-    } catch (error) {
-      next(error);
-    }
-  },
-  // Obtener el resumen de un archivo de logs
-  getSummary: async (req, res, next) => {
-    try {
-      const summary = await analyzeLog.getSummary(getID(req));
-      res.json(summary);
-    } catch (error) {
-      if (error["code"] === "ENOENT") {
-        return res.status(404).json({ message: "El archivo de log no existe" });
+      const { id, type } = req.params;
+      if (!type) {
+        const logs = analyzeLog.getLogs();
+        return res.status(200).json(logs);
       }
-      next(error);
+      const types = await analyzeLog.getTypes(id, type);
+      res.status(200).json(types);
+    } catch (error) {
+      res.status(500).send("Error al obtener los tipos de logs");
     }
   },
 };
